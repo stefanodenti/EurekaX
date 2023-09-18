@@ -9,7 +9,8 @@
     'md:max-w-[400px] lg:max-w-[500px]': size === 'md',
     }"
     class="flex justify-center mx-auto w-full px-2">
-    <eurekax-base-card [title]="title ?? ''"
+    <eurekax-base-card [id]="id" [title]="title ?? ''"
+                       [bgColor]="'bg-neutral'"
                        [ngClass]="{
                    'slide-in-top': position === 'top' || position === 'center',
                    'slide-in-bottom': position === 'bottom',
