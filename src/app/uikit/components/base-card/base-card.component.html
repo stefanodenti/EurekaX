@@ -1,0 +1,6 @@
+<div class="card w-full shadow-xl" [ngClass]="bgColor">
+  <div class="card-body">
+    <div *ngIf="title" class="card-title">{{title}}</div>
+    <ng-content></ng-content>
+  </div>
+</div>

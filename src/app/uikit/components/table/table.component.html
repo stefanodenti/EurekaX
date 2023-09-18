@@ -1,0 +1,57 @@
+<div class="overflow-x-auto h-full">
+  <table
+    class="table"
+    [ngClass]="{
+      'table-xs': size === 'xs',
+      'table-sm': size === 'sm',
+      'table-md': size === 'md',
+      'table-lg': size === 'lg',
+      'table-pin-rows': stickyheader,
+      'table-zebra': zebra
+    }"
+  >
+    <thead>
+      <tr>
+        <ng-container *ngFor="let col of cols">
+          <th>{{ col.value }}</th>
+        </ng-container>
+        <th *ngIf="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody >
+      <div *ngIf="elements.length === 0" class="w-full p-3">No elements.</div>
+      <tr *ngFor="let row of elements" [ngClass]="{ hover: hover }">
+        <th *ngFor="let col of cols">{{ row[col.prop] }}</th>
+        <th *ngIf="actions" class="flex gap-3">
+          <div
+            *ngFor="let action of actions"
+            [ngClass]="action.tooltip?.cssClass"
+            [attr.data-tip]="action.tooltip?.label"
+          >
+            <a
+              class="btn btn-link no-underline"
+              [ngClass]="action.cssClass"
+              (click)="emitAction(row, action.code)"
+              ><fa-icon
+                *ngIf="action.icon"
+                [icon]="$any(action.icon)"
+              ></fa-icon>
+              {{ action.label }}</a
+            >
+          </div>
+        </th>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>
+          <button class="btn btn-ghost btn-xs" (click)="nextSearch.emit()">
+            Load more...
+          </button>
+        </th>
+        <th><span class="font-bold">Loaded:</span> {{ elements.length }}</th>
+        <th *ngFor="let _ of Array((cols.length > 2 && (!actions || actions?.length === 0)) ? (cols.length - 2) : cols.length - 1)"></th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

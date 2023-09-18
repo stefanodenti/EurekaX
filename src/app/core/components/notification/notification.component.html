@@ -1,0 +1,55 @@
+<div class="container border-l-4 p-4 bg-base-200 rounded-sm"
+     [ngClass]="{
+     '/[0.6]': notification.read,
+      ' hover:bg-base-200/50': !notification.read,
+     'border-success': notification.type === notificationType.success,
+     'border-warning': notification.type === notificationType.warning,
+     'border-error': notification.type === notificationType.danger,
+     'border-info': notification.type === notificationType.info,
+     }"
+     (click)="readNotification()">
+  <div class="text-start">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="bg-info rounded-full w-2.5 h-2.5" *ngIf="!notification.read"></div>
+        <div class="font-bold lg:text-lg">
+          {{notification.title}}
+        </div>
+      </div>
+
+      <div class="tooltip tooltip-bottom tooltip-accent" data-tip="Remove">
+        <button
+          (click)="deleteNotification()"
+          class="btn btn-sm btn-ghost rounded-full close-button"
+        >
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="flex justify-between items-start">
+      <div class="mt-0.5 flex-auto">
+        <div>
+          {{notification.message}}
+        </div>
+        <div class="text-xs mt-1">{{notification.createdAt | date: 'medium'}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-end mt-2" *ngIf="!!notification.routerLink">
+    <div class="tooltip tooltip-left tooltip-accent" data-tip="Open">
+      <button
+        class="btn btn-sm btn-ghost"
+        (click)="navigate()"
+      >
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+          <path d="M17 0h-5.768a1 1 0 1 0 0 2h3.354L8.4 8.182A1.003 1.003 0 1 0 9.818 9.6L16 3.414v3.354a1 1 0 0 0 2 0V1a1 1 0 0 0-1-1Z"/>
+          <path d="m14.258 7.985-3.025 3.025A3 3 0 1 1 6.99 6.768l3.026-3.026A3.01 3.01 0 0 1 8.411 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V9.589a3.011 3.011 0 0 1-1.742-1.604Z"/>
+        </svg>
+
+      </button>
+    </div>
+  </div>
+</div>

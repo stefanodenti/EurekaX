@@ -1,0 +1,87 @@
+<form [formGroup]="form" class="space-y-4">
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Image</span>
+    </label>
+    <input type="text" formControlName="imageUrl" placeholder="Type the image url here" class="input input-bordered w-full" />
+  </div>
+
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Name*</span>
+    </label>
+    <input type="text" formControlName="name" placeholder="Type the action name here" class="input input-bordered w-full" />
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">Description</span>
+    </label>
+    <textarea class="textarea textarea-bordered h-24" formControlName="description" placeholder="Type the action description here"></textarea>
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">Roles</span>
+    </label>
+    <div class="flex gap-4 pb-3 flex-wrap">
+      <ng-container *ngFor="let role of form.value.roles">
+        <div class="tooltip" [attr.data-tip]="role.code">
+          <div
+            class="badge badge-primary badge-outline gap-2.5 whitespace-nowrap"
+          >
+            <a class="cursor-pointer">
+              <fa-icon (click)="removeRole(role.id)" icon="xmark"></fa-icon>
+            </a>
+            {{ role.name }}
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="input input-bordered flex items-center gap-1">
+      <input
+        #roleInput
+        (input)="search(roleInput.value)"
+        type="text"
+        placeholder="Add Role..."
+        class="w-full bg-transparent outline-0 text-base-content"
+      />
+      <label
+        class="label"
+        *ngIf="!!form.get('roles')?.errors && form.get('roles')?.dirty"
+      >
+        <span
+          class="label-text-alt text-error"
+          *ngIf="!!form.get('roles')?.hasError('required')"
+          >You have to add at least one role.</span
+        >
+      </label>
+      <span
+        *ngIf="isAutoCompleteLoading"
+        class="loading loading-dots loading-xs text-base-content"
+      ></span>
+    </div>
+  </div>
+  <div class="max-h-32 overflow-y-auto">
+  <ul
+    class="menu menu-vertical shadow bg-base-100 rounded-box w-full "
+    *ngIf="rolesArray.length > 0"
+  >
+    <li *ngFor="let role of rolesArray">
+      <a
+        (click)="
+          selectRole(role, roleInput)"
+      >
+        {{ role.name }} (code: {{ role.code }})
+      </a>
+    </li>
+  </ul>
+</div>
+</form>
+
+<div class="flex w-full justify-center pt-4">
+  <button class="btn btn-primary" [disabled]="form.invalid" (click)="submitAction()">Submit</button>
+  <button class="btn btn-ghost"  (click)="cancelClick()">Cancel</button>
+</div>
+

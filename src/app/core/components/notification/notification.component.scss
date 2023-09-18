@@ -1,0 +1,15 @@
+.close-button {
+  @apply opacity-100;
+}
+
+
+@media (min-width: theme('screens.lg')) {
+  .close-button {
+    @apply opacity-0;
+  }
+
+  .container:hover .close-button {
+    @apply opacity-100;
+  }
+}
+

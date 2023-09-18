@@ -1,0 +1,62 @@
+<eurekax-tab-page
+  [tabs]="['User Types', 'Roles', 'Actions']"
+  [activeTab]="this.selectedTab"
+  [bordered]="true"
+  (tabChange)="changeTab($event)"
+>
+  <div class="mb-4">
+    <eurekax-base-card *ngIf="formVisible">
+      <ng-container [ngSwitch]="selectedTab">
+        <ng-container *ngSwitchCase="'Actions'">
+          <div class="card-title">Action Form</div>
+          <eurekax-action-form
+            [action]="$any(selectedRow)"
+            (cancel)="formVisible = false"
+            (actionSubmit)="saveAction($event)"
+          ></eurekax-action-form>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'User Types'">
+          <div class="card-title">User Type Form</div>
+          <eurekax-user-type-form
+            [userType]="$any(selectedRow)"
+            (userTypeSubmit)="saveUserType($event)"
+            (cancel)="formVisible = false"
+          ></eurekax-user-type-form>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'Roles'">
+          <div class="card-title">Role Form</div>
+          <eurekax-role-form
+            [role]="$any(selectedRow)"
+            (roleSubmit)="saveRole($event)"
+            (cancel)="formVisible = false"
+          ></eurekax-role-form>
+        </ng-container>
+      </ng-container>
+    </eurekax-base-card>
+    <button
+      *ngIf="!formVisible"
+      (click)="selectedRow=null;formVisible = !formVisible"
+      class="btn btn-outline btn-success btn-sm float-right"
+    >
+      <fa-icon [icon]="'plus'"></fa-icon> New
+    </button>
+    <div class="clear-right"></div>
+  </div>
+  <eurekax-base-card>
+    <input type="text" placeholder="Filter by name" [(ngModel)]="filters[0].keyword" (change)="filter()" class="input  input-sm w-full" />
+    <eurekax-table
+    class="h-96"
+      [limit]="limit"
+      [columns]="cols"
+      [rows]="rows"
+      [actions]="tableActions"
+      (fireAction)="fireAction($event)"
+      (nextSearch)="search()"
+      [hover]="true"
+      [zebra]="true"
+      [stickyheader]="true"
+    ></eurekax-table>
+  </eurekax-base-card>
+</eurekax-tab-page>

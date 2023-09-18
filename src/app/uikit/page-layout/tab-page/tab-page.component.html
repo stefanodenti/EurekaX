@@ -1,0 +1,20 @@
+<div class="pb-8 lg:pb-16 mx-auto max-w-screen-xl px-4">
+  <div class="tabs mb-4" [ngClass]="{'tabs-boxed': boxed}">
+    <a
+      *ngFor="let tab of tabs"
+      (click)="selectTab(tab)"
+      class="tab"
+      [ngClass]="{
+        'tab-bordered': bordered,
+        'tab-active': activeTab === tab,
+        'tab-lg': size === 'lg',
+        'tab-md': size === 'md',
+        'tab-sm': size === 'sm',
+        'tab-xs': size === 'xs',
+        'tab-lifted': lifted,
+      }"
+      >{{ tab }}</a
+    >
+  </div>
+  <ng-content></ng-content>
+</div>

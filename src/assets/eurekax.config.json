@@ -1,0 +1,129 @@
+{
+  "general": {
+    "iconStyle": "solid"
+  },
+  "themes": [
+    {
+      "name": "synthwave",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "dark",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "forest",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "night",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "black",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "light",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "cupcake",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "corporate",
+      "logo": "assets/brand/logo.png"
+    },
+    {
+      "name": "valentine",
+      "logo": "assets/brand/logo.png"
+    }
+  ],
+  "layout":
+    {
+      "name": "standard",
+      "navbar": {
+        "visible": true,
+        "configs": {
+          "showThemeSelector": false,
+          "showLanguageSelector": true,
+          "showLogo": true
+        },
+        "navigations": [
+          {
+            "type": "default",
+            "label": "Home",
+            "routerLink": "/home"
+          },
+          {
+            "type": "default",
+            "label": "Contacts",
+            "routerLink": "/contacts"
+          },
+          {
+            "type": "selector",
+            "label": "Admin",
+            "icon": "lock",
+            "childs": [
+              {
+                "label": "Users",
+                "routerLink": "/admin/users"
+              },
+              {
+                "label": "Permissions",
+                "routerLink": "/admin/permissions"
+              }
+            ]
+          }
+        ]
+      },
+      "footer": {
+        "message": "[Standard] Fatto con pazienza da Onzino e Ste.",
+        "navigations": [
+          {
+            "type": "default",
+            "label": "Privacy",
+            "routerLink": "/privacy"
+          },
+          {
+            "type": "default",
+            "label": "License",
+            "routerLink": "/license"
+          }
+        ]
+      },
+      "sidenav": {
+        "visible": true,
+        "configs": {
+          "showThemeSelector": true,
+          "showLanguageSelector": true,
+          "showLogo": true,
+          "showAuthButtons": true
+        },
+        "navigations": [
+          {
+            "type": "default",
+            "label": "Home",
+            "routerLink": "/home",
+            "icon": "home"
+          },
+          {
+            "type": "selector",
+            "label": "Admin",
+            "icon": "lock",
+            "childs": [
+              {
+                "label": "Users",
+                "routerLink": "/admin/users"
+              },
+              {
+                "label": "Permissions",
+                "routerLink": "/admin/permissions"
+              }
+            ]
+          }
+        ]
+      }
+    }
+}

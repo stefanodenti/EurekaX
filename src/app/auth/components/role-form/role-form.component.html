@@ -1,0 +1,116 @@
+<form [formGroup]="form" class="space-y-4">
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Code*</span>
+    </label>
+    <input
+      type="text"
+      formControlName="code"
+      placeholder="Type the role code here"
+      class="input input-bordered w-full"
+    />
+    <label
+      class="label"
+      *ngIf="!!form.get('code')?.errors && form.get('code')?.dirty"
+    >
+      <span
+        class="label-text-alt text-error"
+        *ngIf="!!form.get('code')?.hasError('required')"
+        >This field is required</span
+      >
+    </label>
+  </div>
+
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Name*</span>
+    </label>
+    <input
+      type="text"
+      formControlName="name"
+      placeholder="Type the role name here"
+      class="input input-bordered w-full"
+    />
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">Description</span>
+    </label>
+    <textarea
+      class="textarea textarea-bordered h-24"
+      formControlName="description"
+      placeholder="Type the role description here"
+    ></textarea>
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">Actions</span>
+    </label>
+    <div class="flex gap-4 pb-3 flex-wrap">
+      <ng-container *ngFor="let action of form.value.actions">
+        <div class="tooltip" [attr.data-tip]="action.code">
+          <div
+            class="badge badge-primary badge-outline gap-2.5 whitespace-nowrap"
+          >
+            <a class="cursor-pointer">
+              <fa-icon (click)="removeAction(action.id)" icon="xmark"></fa-icon>
+            </a>
+            {{ action.name }}
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="input input-bordered flex items-center gap-1">
+      <input
+        #actionInput
+        (input)="search(actionInput.value)"
+        type="text"
+        placeholder="Add Action..."
+        class="w-full bg-transparent outline-0 text-base-content"
+      />
+      <label
+        class="label"
+        *ngIf="!!form.get('actions')?.errors && form.get('actions')?.dirty"
+      >
+        <span
+          class="label-text-alt text-error"
+          *ngIf="!!form.get('actions')?.hasError('required')"
+          >You have to add at least one action.</span
+        >
+      </label>
+      <span
+        *ngIf="isAutoCompleteLoading"
+        class="loading loading-dots loading-xs text-base-content"
+      ></span>
+    </div>
+  </div>
+  <div class="max-h-32 overflow-y-auto">
+  <ul
+    class="menu menu-vertical shadow bg-base-100 rounded-box w-full "
+    *ngIf="actionsArray.length > 0"
+  >
+    <li *ngFor="let action of actionsArray">
+      <a
+        (click)="
+          selectAction(action, actionInput)"
+      >
+        {{ action.name }} (code: {{ action.code }})
+      </a>
+    </li>
+  </ul>
+</div>
+</form>
+
+<div class="flex w-full justify-center pt-4">
+  <button
+    class="btn btn-primary"
+    [disabled]="form.invalid"
+    (click)="submitAction()"
+  >
+    Submit
+  </button>
+  <button class="btn btn-ghost" (click)="cancelClick()">Cancel</button>
+</div>

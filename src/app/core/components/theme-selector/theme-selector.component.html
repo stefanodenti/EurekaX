@@ -1,0 +1,67 @@
+<div class="dropdown">
+  <label
+  tabindex="0"
+    class="btn bg-base-100 capitalize"
+    [attr.data-theme]="themeService.theme().name"
+  >
+    <div class="flex items-center gap-1 mr-2.5">
+      <div class="h-4 w-2 bg-primary"></div>
+      <div class="h-4 w-2 bg-secondary"></div>
+      <div class="h-4 w-2 bg-accent"></div>
+    </div>
+    {{ themeService.theme().name }}
+    <svg class="w-2.5 h-2.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+    </svg>
+  </label>
+  <ul
+    tabindex="0"
+    class="shadow menu dropdown-content bg-base-100 rounded-box w-52 z-20 mt-2"
+  >
+    <li
+      *ngFor="
+        let theme of themeService.themes();
+        let first = first;
+        let last = last
+      "
+      [attr.data-theme]="theme.name"
+      class="bg-base-100"
+    >
+      <a
+        (click)="changeTheme(theme)"
+        class="inline-flex w-full px-4 py-2 rounded-none"
+      >
+        <div class="inline-flex items-center w-full">
+          <div class="mr-2">
+            <div *ngIf="themeService.theme().name === theme.name">
+              <svg
+                class="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="flex-auto text-start capitalize">
+            {{ theme.name }}
+          </div>
+
+          <div class="flex items-center gap-1">
+            <div class="h-4 w-2 bg-primary"></div>
+            <div class="h-4 w-2 bg-secondary"></div>
+            <div class="h-4 w-2 bg-accent"></div>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>

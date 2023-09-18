@@ -1,0 +1,34 @@
+<ul class="menu" [ngClass]="{ 'menu-horizontal': mode === 'horizontal' }">
+  <li *ngFor="let navigation of navigations">
+    <ng-container [ngSwitch]="navigation?.type">
+      <ng-container *ngSwitchCase="'selector'">
+        <details #detailsElement>
+          <summary [ngClass]="getCssClass(navigation)" class="hover:text-primary">
+            <fa-icon *ngIf="!!navigation.icon" [icon]="$any(navigation.icon)" size="xl"></fa-icon>
+            {{ navigation?.label }}
+          </summary>
+          <ul class=" bg-base-200">
+          <li
+            *ngFor="let subNav of navigation?.childs"
+          >
+            <a (click)="detailsElement.removeAttribute('open')"  [ngClass]="getCssClass(subNav)" [routerLink]="subNav.routerLink" class="hover:text-primary min-w-[100px]">
+              <fa-icon *ngIf="!!subNav.icon" [icon]="$any(navigation.icon)"></fa-icon>
+              {{ subNav.label }}
+            </a>
+          </li>
+        </ul>
+        </details>
+      </ng-container>
+      <ng-container *ngSwitchCase="'default'">
+        <a
+          class="hover:text-primary"
+          [routerLink]="navigation?.routerLink"
+          [ngClass]="getCssClass(navigation)"
+        >
+          <fa-icon *ngIf="!!navigation.icon" [icon]="$any(navigation.icon)" size="xl"></fa-icon>
+          {{ navigation?.label }}
+        </a>
+      </ng-container>
+    </ng-container>
+  </li>
+</ul>

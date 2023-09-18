@@ -1,0 +1,51 @@
+<div
+  [ngClass]="{
+    'w-72 lg:w-[300px]': sidenavStatus() === 'open',
+    'w-0': sidenavStatus() === 'close',
+    'fixed z-[9000]': isMobile(),
+    relative: !isMobile()
+  }"
+  class="h-screen transition-all duration-200 ease-in-out"
+  *ngIf="config?.visible"
+>
+  <div
+    [class.hidden]="sidenavStatus() === 'close'"
+    class="overflow-y-auto py-5 px-3 h-full bg-base-200 "
+  >
+    <div class="flex items-center px-3 mb-5" *ngIf="config?.configs?.showLogo">
+      <img
+        *ngIf="config?.configs?.showLogo"
+        class="w-full"
+        [src]="themeService.theme().logo"
+        alt="App logo"
+      />
+    </div>
+    <eurekax-theme-selector
+      class="my-4 flex justify-center"
+      *ngIf="config?.configs?.showThemeSelector"
+      [iconMode]="true"
+    ></eurekax-theme-selector>
+    <div class="border-b-2 border-primary mb-4"></div>
+    <eurekax-navigation
+      [navigations]="config?.navigations ?? []"
+      [mode]="'vertical'"
+    ></eurekax-navigation>
+  </div>
+  <div
+    class="hidden absolute bottom-0 left-0 justify-between p-4 space-x-4 w-full lg:flex bg-layout 0 z-20 border-r border-gray-200 dark:border-gray-700 items-center"
+    [class.lg:hidden]="sidenavStatus() === 'close'"
+  >
+    <eurekax-user-logged-dropdown [showName]="true" [position]="'top'"
+      *ngIf="config?.configs?.showAuthButtons"
+    ></eurekax-user-logged-dropdown>
+    <eurekax-language-selector [position]="'top'"
+      *ngIf="config?.configs?.showLanguageSelector"
+    ></eurekax-language-selector>
+  </div>
+</div>
+
+<div
+  *ngIf="isMobile() && sidenavStatus() === 'open'"
+  (click)="closeSidenav()"
+  class="fixed w-screen bg-black bg-opacity-50 z-40 h-screen"
+></div>

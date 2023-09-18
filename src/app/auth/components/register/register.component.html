@@ -1,0 +1,49 @@
+<div class="card bg-base-200  sm:max-w-md">
+  <div class="card-body
+  ">
+    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+      Registration
+    </h1>
+    <form class="space-y-4 md:space-y-6">
+      <div>
+        <label for="email" class="label">Your email</label>
+        <input type="email" [(ngModel)]="email" name="email" id="email"
+        class="input input-bordered input-primary w-full"
+          placeholder="name@domain.com" required>
+      </div>
+      <div>
+        <label for="password" class="label">Password</label>
+        <input type="password" [(ngModel)]="password" name="password" id="password" placeholder="••••••••"
+        class="input input-bordered input-primary w-full"
+          required>
+      </div>
+      <ng-container>
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input id="privacy" aria-describedby="privacy" type="checkbox" [(ngModel)]="privacyCheck" name="privacy"
+              class="checkbox checkbox-primary">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="privacy">Accept <a class="text-white hover:text-primary" routerLink="/privacy" target="_blank">Privacy Policy</a> </label>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input id="terms" aria-describedby="terms" type="checkbox" [(ngModel)]="termsCheck" name="terms"
+              class="checkbox checkbox-primary">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="terms">Accept <a class="hover:text-primary" routerLink="/terms" target="_blank">Terms and conditions</a> </label>
+          </div>
+        </div>
+      </ng-container>
+      <button (click)="register()" [disabled]="!email || !password || !privacyCheck || !termsCheck"
+        class="w-full btn btn-primary">
+        Sign up</button>
+      <p class="text-sm font-light">
+        Go back to <a routerLink="/auth/sign-in" class="font-medium  hover:underline">Sign in</a>
+      </p>
+    </form>
+  </div>
+
+</div>

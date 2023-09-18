@@ -1,0 +1,13 @@
+<div class="drawer drawer-end">
+  <input id="notifications-drawer" #notificationDrawerCheckbox type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="drawer-side ">
+    <label (click)="notificationService.toggleNotificationCenter()" class="drawer-overlay"></label>
+    <eurekax-notification-center></eurekax-notification-center>
+  </div>
+</div>
+<div class="fixed z-[9999] top-0 md:top-3 md:right-3">
+  <eurekax-alert-list></eurekax-alert-list>
+</div>

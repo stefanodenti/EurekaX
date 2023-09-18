@@ -1,0 +1,39 @@
+<div
+  class="max-sm:h-full card bg-base-200 ">
+  <div class="card-body">
+    <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2x">
+      Welcome back
+    </h1>
+    <button (click)="googleLogin()" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded  px-5 py-2.5 inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55  w-full">
+      <fa-icon [icon]="['fab', 'google']" class="mr-2"></fa-icon>
+      Sign in with Google
+    </button>
+    <form class="space-y-4 md:space-y-6" (submit)="login()">
+      <div>
+        <label for="email" class="label">Your email</label>
+        <input type="email" [(ngModel)]="email" name="email" id="email"
+        class="input input-bordered input-primary w-full"
+                  placeholder="name@domain.com" required>
+      </div>
+      <div>
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+        <input type="password" [(ngModel)]="password" name="password" id="password" placeholder="••••••••"
+        class="input input-bordered input-primary w-full"          required="">
+      </div>
+      <div class="flex items-center justify-between">
+
+        <a routerLink="/auth/forgot-password"
+          class="text-sm font-medium hover:underline">Forgot
+          password?</a>
+      </div>
+      <button type="submit"
+        class="btn btn-primary w-full"
+        [disabled]="!email || !password">
+        Sign in</button>
+      <p class="text-sm font-light">
+        Don't have an account yet? <a routerLink="/auth/sign-up"
+          class="font-medium  hover:underline">Sign up</a>
+      </p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<button class="btn btn-ghost" (click)="toggleNotificationCenter()">
+  <div class="indicator">
+      <span *ngIf="unreadNotifications() > 0"
+            class="indicator-item badge badge-secondary z-0">{{unreadNotifications() < 99 ? unreadNotifications() : '99+'}}</span>
+    <fa-icon icon="bell" size="xl"></fa-icon>
+  </div>
+</button>

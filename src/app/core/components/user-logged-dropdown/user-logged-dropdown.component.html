@@ -1,0 +1,32 @@
+<ng-container *ngIf="authService.isLoggedIn; else loginButton">
+  <div class="dropdown " [ngClass]="{ 'dropdown-top': position === 'top', 'dropdown-end': position === 'end' }">
+    <label tabindex="0" [ngClass]="{ 'flex items-center gap-2': showName }">
+      <div  class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img [src]="authService.userData?.photoURL" />
+        </div>
+      </div>
+      <ng-container *ngIf="showName">{{
+        authService.userData?.displayName
+      }}</ng-container>
+    </label>
+    <ul
+      tabindex="0"
+      class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+    >
+      <li>
+        <a class="justify-between" routerLink="/user-profile">
+          Profile
+          <span class="badge badge-primary">New</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/settings">Settings</a>
+      </li>
+      <li><a (click)="authService.SignOut()">Logout</a></li>
+    </ul>
+  </div>
+</ng-container>
+<ng-template #loginButton>
+  <a routerLink="/auth/sign-in" class="btn btn-outline btn-primary btn-sm">Sign In</a>
+</ng-template>

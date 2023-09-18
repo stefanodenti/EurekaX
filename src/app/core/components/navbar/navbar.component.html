@@ -1,0 +1,75 @@
+<div class="navbar bg-base-200 relative z-50                                                                                             " [class.hidden]="!config?.visible">
+  <div class="flex-1">
+    <label class="btn btn-ghost swap swap-rotate">
+
+      <!-- this hidden checkbox controls the state -->
+      <input
+        type="checkbox"
+        (click)="toggleSidenav()"
+        [checked]="sidenavService.sidenavStatus() === 'open'"
+      />
+
+      <!-- hamburger icon -->
+      <svg class="w-6 h-6 swap-off" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      </svg>
+
+      <!-- close icon -->
+      <fa-icon icon="xmark" size="xl" class="swap-on"></fa-icon>
+    </label>
+    <a class="btn btn-ghost" routerLink="/">
+      <img
+        *ngIf="config?.configs?.showLogo"
+        class="h-full"
+        [src]="themeService.theme().logo"
+        alt="logo"
+      />
+    </a>
+  </div>
+  <eurekax-notification-button class="lg:hidden"></eurekax-notification-button>
+  <a class="lg:hidden btn btn-ghost" (click)="showMobileMenu = !showMobileMenu">
+    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+    </svg>
+  </a>
+  <div class="flex-none max-lg:hidden">
+    <eurekax-navigation
+      [navigations]="config?.navigations ?? []"
+      class="mr-4"
+    ></eurekax-navigation>
+
+    <eurekax-theme-selector
+      *ngIf="config?.configs?.showThemeSelector"
+    ></eurekax-theme-selector>
+    <eurekax-language-selector
+      *ngIf="config?.configs?.showLanguageSelector"
+    ></eurekax-language-selector>
+    <eurekax-notification-button></eurekax-notification-button>
+    <eurekax-user-logged-dropdown></eurekax-user-logged-dropdown>
+  </div>
+  <div
+    class="flex flex-col lg:hidden slide-in-top w-full absolute bottom-0 top-full left-0"
+    *ngIf="showMobileMenu"
+  >
+    <div class="w-full bg-base-200 ">
+      <eurekax-navigation
+        [navigations]="config?.navigations ?? []"
+        [mode]="'vertical'"
+      ></eurekax-navigation>
+    </div>
+    <div
+      class="flex items-center justify-between p-3 border-t border-primary w-full bg-base-200"
+    >
+      <eurekax-user-logged-dropdown></eurekax-user-logged-dropdown>
+      <eurekax-theme-selector
+        *ngIf="config?.configs?.showThemeSelector"
+      ></eurekax-theme-selector>
+      <div class="flex items-center">
+        <eurekax-language-selector
+          [position]="'end'"
+          *ngIf="config?.configs?.showLanguageSelector"
+        ></eurekax-language-selector>
+      </div>
+    </div>
+  </div>
+</div>

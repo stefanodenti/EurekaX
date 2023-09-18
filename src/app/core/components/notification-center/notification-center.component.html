@@ -1,0 +1,27 @@
+<div
+  class="h-screen w-screen md:w-[500px]"
+>
+  <div
+    class="overflow-y-auto py-5 px-3 h-full bg-base-100 text-base-content"
+  >
+    <div class="grid grid-cols-3 items-center border-b-2 border-b-neutral pb-2">
+      <div class="opacity-100 md:opacity-0 md:pointer-events-none">
+        	<button (click)="toggleNotifications()" class="btn btn-ghost btn-sm">Close</button>
+      </div>
+      <div class="text-center font-bold text-lg lg:text-xl">Notifications</div>
+      <div></div>
+    </div>
+    <ul>
+      <li *ngIf="notifications().length === 0">
+        <div class="text-center font-bold py-4">
+          You have no notifications.
+        </div>
+      </li>
+      <ng-container *ngFor="let notification of notifications()">
+        <li class="py-4 ">
+         <eurekax-notification [notification]="notification"></eurekax-notification>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>
