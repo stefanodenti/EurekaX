@@ -27,6 +27,6 @@ export class HomeComponent implements OnInit {
   }
 
   openModal() {
-    this.modal.openModal(RoleFormComponent, {position: 'top', size: 'sm'})
+    const modal = this.modal.openModal(RoleFormComponent, {position: 'top', size: 'sm'});
   }
 }

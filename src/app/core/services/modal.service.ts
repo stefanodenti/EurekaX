@@ -36,10 +36,8 @@ export class ModalService {
       modalComponent.instance.backdropDismiss = options?.backdropDismiss ?? true;
       modalComponent.instance.position = options?.position ?? 'center';
       modalComponent.instance.size = options?.size ?? 'lg';
-      const modalNotifier = new Subject<string>();
-      modalComponent.instance.closeEvent.subscribe(() => modalNotifier?.next('close'));
       modalComponent.hostView.detectChanges();
       this.document.body.appendChild(modalComponent.location.nativeElement);
-      return modalNotifier.asObservable();
+      return modalComponent.instance;
   }
 }
