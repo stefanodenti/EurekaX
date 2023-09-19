@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Footer} from "../../models/config.model";
+import {ThemeService} from "../../services/theme.service";
 
 @Component({
   selector: 'eurekax-footer',
@@ -9,7 +10,7 @@ import {Footer} from "../../models/config.model";
 export class FooterComponent implements OnInit {
   @Input() config: Footer | null = null;
   year = new Date().getFullYear();
-  constructor() { }
+  constructor( public themeService: ThemeService,) { }
 
   ngOnInit(): void {
   }

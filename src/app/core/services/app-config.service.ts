@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LayoutService} from "./layout.service";
 import {ThemeService} from "./theme.service";
-import {AppConfig} from "../models/config.model";
+import {AppConfig, GeneralConfig} from "../models/config.model";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
@@ -12,6 +12,7 @@ import {fab} from "@fortawesome/free-brands-svg-icons";
   providedIn: 'root'
 })
 export class AppConfigService {
+  general = signal<GeneralConfig | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -28,6 +29,7 @@ export class AppConfigService {
           this.layoutService.setLayouts(res.layout);
           this.themeService.initializeTheme(res.themes[0]);
           this.themeService.themes.set(res.themes);
+          this.general.set(res.general);
 
           switch (res.general?.iconStyle) {
             case 'solid':

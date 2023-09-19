@@ -8,7 +8,7 @@ export class ThemeService {
   isDark = signal<boolean>(false);
   theme = signal<Theme>({
     name: '',
-    logo: '',
+    isDark: false,
   });
   themes = signal<Theme[]>([]);
 

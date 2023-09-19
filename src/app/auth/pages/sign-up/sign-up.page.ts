@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, computed, OnInit} from '@angular/core';
+import {ThemeService} from "../../../core/services/theme.service";
+import {AppConfigService} from "../../../core/services/app-config.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -6,8 +8,15 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
-  constructor() {
-  }
+  logoUrl = computed(() => {
+    if(this.themeService.theme().isDark) {
+      return this.appConfigService.general()?.brand.logoUrlDark;
+    } else {
+      return this.appConfigService.general()?.brand.logoUrl;
+    }
+  })
+
+  constructor(private themeService: ThemeService, private appConfigService: AppConfigService) { }
 
   ngOnInit() {
   }

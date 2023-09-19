@@ -21,7 +21,7 @@
       <img
         *ngIf="config?.configs?.showLogo"
         class="h-full"
-        [src]="themeService.theme().logo"
+        [src]="themeService.theme().isDark ? config?.logoUrlDark : config?.logoUrl"
         alt="logo"
       />
     </a>

@@ -16,7 +16,7 @@
       <img
         *ngIf="config?.configs?.showLogo"
         class="w-full"
-        [src]="themeService.theme().logo"
+        [src]="themeService.theme().isDark ? config?.logoUrlDark : config?.logoUrl"
         alt="App logo"
       />
     </div>

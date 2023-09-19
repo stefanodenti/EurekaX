@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, computed, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {AppConfigService} from "../../../core/services/app-config.service";
+import {ThemeService} from "../../../core/services/theme.service";
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,7 +10,14 @@ import {AuthService} from '../../services/auth.service';
 })
 export class ForgotPasswordPage implements OnInit {
   passwordResetEmail: string = '';
-  constructor(private authService: AuthService) {
+  logoUrl = computed(() => {
+    if(this.themeService.theme().isDark) {
+      return this.appConfigService.general()?.brand.logoUrlDark;
+    } else {
+      return this.appConfigService.general()?.brand.logoUrl;
+    }
+  })
+  constructor(private authService: AuthService, private appConfigService: AppConfigService, private themeService: ThemeService) {
   }
 
   ngOnInit() {
