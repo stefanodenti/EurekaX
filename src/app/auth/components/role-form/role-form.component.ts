@@ -1,5 +1,15 @@
 import { Filter } from './../../../core/models/query.model';
-import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {Action, Role} from "../../models/user";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {concatMap, finalize, Subscription, take, timer} from "rxjs";
@@ -10,7 +20,7 @@ import {QueryFirestoreService} from "../../../core/services/query-firestore.serv
   templateUrl: './role-form.component.html',
   styleUrls: ['./role-form.component.scss']
 })
-export class RoleFormComponent {
+export class RoleFormComponent implements OnChanges {
   @Input() role: Role | null = null;
   @Output() roleSubmit: EventEmitter<Role> = new EventEmitter<Role>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
